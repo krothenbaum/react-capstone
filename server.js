@@ -1,3 +1,4 @@
+require('dotenv').load();
 const nodemon = require('nodemon');
 const path = require('path');
 
