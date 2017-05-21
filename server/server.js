@@ -12,14 +12,17 @@ const config = require('../config/config');
 const webpackConfig = require('../webpack.config');
 
 const isDev = process.env.NODE_ENV !== 'production';
-const port  = process.env.PORT || 8080;
+const {DATABASE_URL, PORT} = require('../config/config');
+console.log(DATABASE_URL);
+console.log(PORT);
+// const port  = process.env.PORT || 8080;
 
 
 // Configuration
 // ================================================================================================
 
 // Set up Mongoose
-mongoose.connect(config.db);
+mongoose.connect(DATABASE_URL);
 mongoose.Promise = global.Promise;
 
 const app = express();
@@ -59,12 +62,12 @@ if (isDev) {
   });
 }
 
-app.listen(port, '0.0.0.0', (err) => {
+app.listen(PORT, '0.0.0.0', (err) => {
   if (err) {
     console.log(err);
   }
 
-  console.info('>>> 🌎 Open http://0.0.0.0:%s/ in your browser.', port);
+  console.info('>>> 🌎 Open http://0.0.0.0:%s/ in your browser.', PORT);
 });
 
 module.exports = app;
