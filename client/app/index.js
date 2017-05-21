@@ -10,7 +10,6 @@ import {
 
 import App from './components/App/App';
 import NotFound from './components/App/NotFound';
-
 import Home from './components/Home/Home';
 
 import HelloWorld from './components/HelloWorld/HelloWorld';
@@ -28,3 +27,26 @@ render((
     </App>
   </Router>
 ), document.getElementById('app'));
+
+//import 'babel-polyfill';
+//import React from 'react';
+//import ReactDOM from "react-dom";
+import {createStore} from 'redux'; 
+import allReducers from './reducers'; 
+const store = createStore(allReducers);
+import {Provider} from 'react-redux';
+//import App from './components/App/App'; 
+
+
+
+console.log('store')
+//console.log(createStore);
+console.log(store);
+/*
+render((
+    <Provider store = {store}>
+		<App />
+    </Provider>),
+		
+    document.getElementById('app')
+);*/
