@@ -6,12 +6,13 @@ import {
   Route,
   Link,
   Switch
-} from 'react-router-dom'
+} from 'react-router-dom';
+
 
 import App from './components/App/App';
 import NotFound from './components/App/NotFound';
 
-import SimpleMapExample from './components/Map/Map';
+import GeolocationExample from './components/Map/Map';
 
 import HelloWorld from './components/HelloWorld/HelloWorld';
 
@@ -32,7 +33,7 @@ render((
   <Router>
     <App>
       <Switch>
-        <Route exact path="/" component={SimpleMapExample}/>
+        <Route exact path="/" component={GeolocationExample}/>
         <Route path="/helloworld" component={HelloWorld}/>
         <Route component={NotFound}/>
       </Switch>

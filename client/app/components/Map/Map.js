@@ -1,4 +1,9 @@
 /* global google */
+
+import canUseDOM from "can-use-dom";
+
+import raf from "raf";
+
 import {
   default as React,
   Component,
@@ -7,32 +12,115 @@ import {
 import {
   withGoogleMap,
   GoogleMap,
-} from "../../../../node_modules/react-google-maps/lib";
+  Circle,
+  InfoWindow,
+} from "react-google-maps";
 
-/*
- * Sample From: https://developers.google.com/maps/documentation/javascript/examples/map-simple
- */
-const SimpleMapExampleGoogleMap = withGoogleMap(props => (
+const geolocation = (
+  canUseDOM && navigator.geolocation ?
+  navigator.geolocation : 
+  ({
+    getCurrentPosition(success, failure) {
+      failure(`Your browser doesn't support geolocation.`);
+    },
+  })
+);
+
+const GeolocationExampleGoogleMap = withGoogleMap(props => (
   <GoogleMap
-    defaultZoom={8}
-    defaultCenter={{ lat: -34.397, lng: 150.644 }}
-  />
+    defaultZoom={12}
+    center={props.center}
+  >
+    {props.center && (
+      <InfoWindow position={props.center}>
+        <div>{props.content}</div>
+      </InfoWindow>
+    )}
+    {props.center && (
+      <Circle
+        center={props.center}
+        radius={props.radius}
+        options={{
+          fillColor: `red`,
+          fillOpacity: 0.20,
+          strokeColor: `red`,
+          strokeOpacity: 1,
+          strokeWeight: 1,
+        }}
+      />
+    )}
+  </GoogleMap>
 ));
 
 /*
+ * https://developers.google.com/maps/documentation/javascript/examples/map-geolocation
+ *
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
-export default class SimpleMapExample extends Component {
+export default class GeolocationExample extends Component {
+
+  state = {
+    center: null,
+    content: null,
+    radius: 6000,
+  };
+
+  isUnmounted = false;
+
+  componentDidMount() {
+    const tick = () => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({ radius: Math.max(this.state.radius - 20, 0) });
+
+      if (this.state.radius > 200) {
+        raf(tick);
+      }
+    };
+    geolocation.getCurrentPosition((position) => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({
+        center: {
+          lat: position.coords.latitude,
+          lng: position.coords.longitude,
+        },
+        content: `Location found using HTML5.`,
+      });
+
+      raf(tick);
+    }, (reason) => {
+      if (this.isUnmounted) {
+        return;
+      }
+      this.setState({
+        center: {
+          lat: 60,
+          lng: 105,
+        },
+        content: `Error: The Geolocation service failed (${reason}).`,
+      });
+    });
+  }
+
+  componentWillUnmount() {
+    this.isUnmounted = true;
+  }
 
   render() {
     return (
-      <SimpleMapExampleGoogleMap
+      <GeolocationExampleGoogleMap
         containerElement={
-          <div style={{ height: `100%` }} />
+          <div style={{ height: `1000px` }} />
         }
         mapElement={
-          <div style={{ height: `100%` }} />
+          <div style={{ height: `1000px` }} />
         }
+        center={this.state.center}
+        content={this.state.content}
+        radius={this.state.radius}
       />
     );
   }
