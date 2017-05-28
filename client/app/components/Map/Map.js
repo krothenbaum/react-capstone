@@ -4,8 +4,6 @@ import canUseDOM from "can-use-dom";
 
 import raf from "raf";
 
-
-
 import {
 	default as React,
 	Component,

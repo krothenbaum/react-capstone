@@ -3,12 +3,13 @@ import ReactDom from 'react-dom';
 
 import Header from '../Header/Header';
 import Footer from '../Footer/Footer';
-import Popup from 'react-popup';
+import ExampleApp from '../PopupButton/PopupButton';
+// import Prompt from '../popup/popup';
 
 const App = ({ children }) => (
   <div>
     <Header />
-    <Popup />
+    <ExampleApp />
 
     <main>
       {children}
@@ -17,5 +18,5 @@ const App = ({ children }) => (
     <Footer />
   </div>
 );
-Popup.alert('I am alert, nice to meet you');
+
 export default App;
