@@ -4,6 +4,8 @@ import canUseDOM from "can-use-dom";
 
 import raf from "raf";
 
+
+
 import {
 	default as React,
 	Component,
@@ -35,6 +37,8 @@ const GeolocationExampleGoogleMap = withGoogleMap(props => (
 			position={props.center}
 			title='You are (near) here.'
 		/>
+
+
 
 	</GoogleMap>
 ));
@@ -86,10 +90,10 @@ export default class GeolocationExample extends Component {
 		return (
 			<GeolocationExampleGoogleMap
 				containerElement={
-					<div style={{ height: `1000px` }} />
+					<div style={{ height: `500px` }} />
 				}
 				mapElement={
-					<div style={{ height: `1000px` }} />
+					<div style={{ height: `500px` }} />
 				}
 				center={this.state.center}
 			/>
