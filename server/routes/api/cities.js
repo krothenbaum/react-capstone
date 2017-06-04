@@ -15,7 +15,10 @@ module.exports = (app) => {
   			const random = Math.floor(Math.random() * count);
   			City.findOne().skip(random)
   				.exec()
-  				.then((city) => console.log(city))
+  				.then(result => {
+  					console.log(result);
+  					res.json(result);
+  				})
   				.catch((err) => next(err));
   		})
   		.catch((err) => next(err));

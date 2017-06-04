@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import ReactModal from 'react-modal';
-import SpecificLocation from '../Map/SpecificLocation';
+import RandomCityMap from '../Map/Randomcity';
 
 export default class ExampleApp extends React.Component {
   constructor () {
@@ -30,7 +30,8 @@ export default class ExampleApp extends React.Component {
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
         >
-        		<SpecificLocation />
+        		<RandomCityMap />
+            <RandomCityMap />
           <button onClick={this.handleCloseModal}>Close Modal</button>
         </ReactModal>
       </div>
