@@ -2,10 +2,23 @@ const City = require('../../models/City');
 
 module.exports = (app) => {
   app.get('/api/cities', (req, res, next) => {
-    City.findOne()
+    City.find()
       .exec()
       .then((city) => console.log(city))
       .catch((err) => next(err));
+  });
+
+  app.get('/api/randomcity', (req, res, next) => {
+  	City.count()
+  		.exec()
+  		.then((count) => {
+  			const random = Math.floor(Math.random() * count);
+  			City.findOne().skip(random)
+  				.exec()
+  				.then((city) => console.log(city))
+  				.catch((err) => next(err));
+  		})
+  		.catch((err) => next(err));
   });
 
   // app.post('/api/counters', function (req, res, next) {
