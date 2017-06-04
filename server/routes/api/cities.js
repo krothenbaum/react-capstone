@@ -4,25 +4,32 @@ module.exports = (app) => {
   app.get('/api/cities', (req, res, next) => {
     City.find()
       .exec()
-      .then((city) => console.log(city))
+      .then((cities) => {
+      	let citiesArr = [];
+      	for(let i = 0; i < 2; i++) { 
+      		const random = Math.floor(Math.random() * cities.length);
+      		citiesArr.push(cities[random]);
+      		// console.log(cities[random]);
+      	}
+      	res.json(citiesArr);
+      })
       .catch((err) => next(err));
   });
 
-  app.get('/api/randomcity', (req, res, next) => {
-  	City.count()
-  		.exec()
-  		.then((count) => {
-  			const random = Math.floor(Math.random() * count);
-  			City.findOne().skip(random)
-  				.exec()
-  				.then(result => {
-  					console.log(result);
-  					res.json(result);
-  				})
-  				.catch((err) => next(err));
-  		})
-  		.catch((err) => next(err));
-  });
+  // app.get('/api/randomcity', (req, res, next) => {
+  // 	City.count()
+  // 		.exec()
+  // 		.then((count) => {
+  // 			const random = Math.floor(Math.random() * count);
+  // 			City.findOne().skip(random)
+  // 				.exec()
+  // 				.then(result => {
+  // 					res.json(result);
+  // 				})
+  // 				.catch((err) => next(err));
+  // 		})
+  // 		.catch((err) => next(err));
+  // });
 
   // app.post('/api/counters', function (req, res, next) {
   //   const counter = new Counter();

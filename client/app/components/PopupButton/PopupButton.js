@@ -2,12 +2,14 @@ import React, { Component } from 'react';
 import ReactDom from 'react-dom';
 import ReactModal from 'react-modal';
 import RandomCityMap from '../Map/Randomcity';
+import 'whatwg-fetch';
 
 export default class ExampleApp extends React.Component {
   constructor () {
     super();
     this.state = {
-      showModal: false
+      showModal: false,
+      name: null
     };
     
     this.handleOpenModal = this.handleOpenModal.bind(this);
@@ -15,17 +17,31 @@ export default class ExampleApp extends React.Component {
   }
   
   handleOpenModal () {
-    this.setState({ showModal: true });
+    let name = prompt("Please enter your name", "Harry Potter");
+    console.log(name);
+    this.setState({ 
+      showModal: true,
+      name: name
+    });
   }
   
   handleCloseModal () {
     this.setState({ showModal: false });
+    fetch('/api/score', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        name: this.state.name
+      })
+    });
   }
   
   render () {
     return (
       <div>
-        <button onClick={this.handleOpenModal}>Trigger Modal</button>
+        <button onClick={this.handleOpenModal}>Start Game</button>
         <ReactModal 
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"

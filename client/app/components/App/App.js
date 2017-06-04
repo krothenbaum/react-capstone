@@ -8,14 +8,11 @@ import ExampleApp from '../PopupButton/PopupButton';
 
 const App = ({ children }) => (
   <div>
-    <Header />
     <ExampleApp />
 
     <main>
       {children}
     </main>
-
-    <Footer />
   </div>
 );
 

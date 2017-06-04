@@ -60,7 +60,6 @@ export default class RandomCityMap extends Component {
         return response.json()
       })
       .then((city) => {
-        console.log(city);
         this.setState({
           center: {
             lat: city.lat,
@@ -104,10 +103,10 @@ export default class RandomCityMap extends Component {
     return (
       <RandomCity
         containerElement={
-          <div style={{ height: `500px` }} />
+          <div style={{ height: `250px` }} />
         }
         mapElement={
-          <div style={{ height: `500px` }} />
+          <div style={{ height: `250px` }} />
         }
         center={this.state.center}
         name={this.state.name}
