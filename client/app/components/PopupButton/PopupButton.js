@@ -15,7 +15,7 @@ export default class ExampleApp extends React.Component {
     this.handleOpenModal = this.handleOpenModal.bind(this);
     this.handleCloseModal = this.handleCloseModal.bind(this);
   }
-  
+
   handleOpenModal () {
     let name = prompt("Please enter your name", "Harry Potter");
     console.log(name);
