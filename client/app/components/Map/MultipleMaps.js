@@ -21,6 +21,10 @@ const GettingStartedGoogleMap = withGoogleMap(props => (
 		defaultZoom={8}
 		center={props.center}
 	>
+	<Marker
+			position={props.center}
+			title={props.name}
+		/>
 		
 	</GoogleMap>
 ));
@@ -72,8 +76,10 @@ export default class MultipleMaps extends Component {
 							lng: Number(aMap.lon)
 						}
 
+					const style = {height: `250px`, width: `250px`}
+
 					return (
-						<div style={{height: `250px`}}>
+						<div style={style}>
 							<GettingStartedGoogleMap
 								containerElement={
 									<div style={{ height: `100%` }} />
@@ -82,6 +88,7 @@ export default class MultipleMaps extends Component {
 									<div style={{ height: `100%` }} />
 								}
 								center={center}
+								name={aMap.city}
 							/>
 						</div>
 					)

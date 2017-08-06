@@ -4,6 +4,20 @@ import ReactModal from 'react-modal';
 import RandomCityMap from '../Map/Randomcity';
 import 'whatwg-fetch';
 
+const customStyles = {
+  content : {
+    top                   : '50%',
+    left                  : '50%',
+    right                 : 'auto',
+    bottom                : 'auto',
+    marginRight           : '-50%',
+    width                 : '600px',
+    height                : '600px',
+    transform             : 'translate(-50%, -50%)',
+    textAlign             : 'center'
+  }
+};
+
 export default class ExampleApp extends React.Component {
   constructor () {
     super();
@@ -45,7 +59,9 @@ export default class ExampleApp extends React.Component {
         <ReactModal 
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
+           style={customStyles}
         >
+            <h1>Which city is closer?</h1>
         		<RandomCityMap />
             <RandomCityMap />
           <button onClick={this.handleCloseModal}>Close Modal</button>

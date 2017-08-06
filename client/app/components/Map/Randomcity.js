@@ -17,6 +17,13 @@ import {
 
 import 'whatwg-fetch';
 
+const containerStyle = {
+  display: 'inline-block', 
+  height: '250px',
+  width: '250px',
+  padding: '10px'
+}
+
 const geolocation = (
   canUseDOM && navigator.geolocation ?
   navigator.geolocation : 
@@ -37,6 +44,7 @@ const RandomCity = withGoogleMap(props => (
       position={props.center}
       title={props.name}
     />
+    <h1>{props.name}</h1>
   </GoogleMap>
 ));
 
@@ -101,16 +109,19 @@ export default class RandomCityMap extends Component {
 
   render() {
     return (
-      <RandomCity
-        containerElement={
-          <div style={{ height: `250px` }} />
-        }
-        mapElement={
-          <div style={{ height: `250px` }} />
-        }
-        center={this.state.center}
-        name={this.state.name}
-      />
+
+        <RandomCity
+          containerElement={
+            <div style={containerStyle} />
+          }
+          mapElement={
+            <div style={{ height: `250px`, width: `250px` }} />
+          }
+          center={this.state.center}
+          name={this.state.name}
+        >
+        </RandomCity>
+
     );
   }
 }
