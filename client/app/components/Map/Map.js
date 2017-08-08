@@ -15,7 +15,7 @@ import {
 	Marker,
 } from "react-google-maps";
 
-import ExampleApp from '../PopupButton/PopupButton';
+// import ExampleApp from '../PopupButton/PopupButton';
 
 const geolocation = (
 	canUseDOM && navigator.geolocation ?
@@ -49,12 +49,29 @@ const GeolocationExampleGoogleMap = withGoogleMap(props => (
  * Add <script src="https://maps.googleapis.com/maps/api/js"></script> to your HTML to provide google.maps reference
  */
 export default class GeolocationExample extends Component {
-
-	state = {
-		center: null,
-	};
+	constructor () {
+		super();
+		this.state = {
+			center: null,
+			name: null
+		}
+		this.handleGameStart = this.handleGameStart.bind(this);
+	}
+	// state = {
+	// 	center: null,
+	// 	name: null
+	// };
 
 	isUnmounted = false;
+
+	 handleGameStart () {
+    let name = prompt("Please enter your name", "Harry Potter");
+    console.log(name);
+    this.setState({ 
+      name: name
+    });
+    window.location = '/game';
+  }
 
 	componentDidMount() {
 
@@ -89,7 +106,6 @@ export default class GeolocationExample extends Component {
 	render() {
 		return (
 			<div>
-				<ExampleApp />
 				<GeolocationExampleGoogleMap
 					containerElement={
 						<div style={{ height: `500px` }} />
@@ -99,7 +115,8 @@ export default class GeolocationExample extends Component {
 					}
 					center={this.state.center}
 				/>
-			</div>
+				<button onClick={this.handleGameStart}>Start Game</button>
+			</div>			
 		);
 	}
 }

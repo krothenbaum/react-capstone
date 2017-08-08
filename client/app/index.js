@@ -10,7 +10,7 @@ import {
 
 import App from './components/App/App';
 import NotFound from './components/App/NotFound';
-
+import GameApp from './components/Gameapp/GameApp';
 import GeolocationExample from './components/Map/Map';
 import MultipleMaps from './components/Map/MultipleMaps'
 
@@ -23,6 +23,7 @@ render((
     <App>
       <Switch>
         <Route exact path="/" component={GeolocationExample}/>
+        <Route exact path='/game' component={GameApp}/>
         <Route exact path='/multiple' component={MultipleMaps}/>
         <Route path="/helloworld" component={HelloWorld}/>
         <Route component={NotFound}/>

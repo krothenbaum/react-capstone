@@ -51,24 +51,19 @@ export default class ExampleApp extends React.Component {
       })
     });
   }
-  
-  logLat(params) {
-    console.log('?!?!');
-    console.log(params);
-  }
 
   render () {
     return (
       <div>
         <button onClick={this.handleOpenModal}>Start Game</button>
         <ReactModal
-           text="testing" 
+           text="testing"
            isOpen={this.state.showModal}
            contentLabel="Minimal Modal Example"
            style={customStyles}
         >
             <h1>Which city is closer?</h1>
-        		<RandomCityMap onClick={this.logLat}/>
+        		<RandomCityMap />
             <RandomCityMap />
           <button onClick={this.handleCloseModal}>Close Modal</button>
         </ReactModal>
