@@ -79,6 +79,7 @@ export default class RandomCityMap extends Component {
       .catch((err) => {
         console.log(err);
       });
+
     // geolocation.getCurrentPosition((position) => {
     //   if (this.isUnmounted) {
     //     return;
@@ -105,6 +106,10 @@ export default class RandomCityMap extends Component {
 
   componentWillUnmount() {
     this.isUnmounted = true;
+  }
+
+  log2(params) {
+    console.log('!$!$!$!$!');
   }
 
   render() {

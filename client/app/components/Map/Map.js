@@ -15,6 +15,8 @@ import {
 	Marker,
 } from "react-google-maps";
 
+import ExampleApp from '../PopupButton/PopupButton';
+
 const geolocation = (
 	canUseDOM && navigator.geolocation ?
 	navigator.geolocation : 
@@ -86,15 +88,18 @@ export default class GeolocationExample extends Component {
 
 	render() {
 		return (
-			<GeolocationExampleGoogleMap
-				containerElement={
-					<div style={{ height: `500px` }} />
-				}
-				mapElement={
-					<div style={{ height: `500px` }} />
-				}
-				center={this.state.center}
-			/>
+			<div>
+				<ExampleApp />
+				<GeolocationExampleGoogleMap
+					containerElement={
+						<div style={{ height: `500px` }} />
+					}
+					mapElement={
+						<div style={{ height: `500px` }} />
+					}
+					center={this.state.center}
+				/>
+			</div>
 		);
 	}
 }
